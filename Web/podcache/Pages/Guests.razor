@@ -1,0 +1,70 @@
+﻿@page "/guests"
+@using podcache.Data.Domain
+@using podcache.Data.Context
+@inject HttpClient Http
+
+<h3>Guests</h3>
+
+@foreach (var guestTileInfo in _guestList)
+{
+  <div class="col-xs-4 col-sm-4 col-md-3">
+    <div class="item">
+      <div class="item-media rounded">
+        <a href="artist.detail.html?id=@guestTileInfo.Guest.GuestID" 
+           class="item-media-content"
+           style="background-image: url('images/@guestTileInfo.Guest.HeadshotImagePath');"></a>
+      </div>
+      <div class="item-info text-center">
+        <div class="item-title text-ellipsis">
+          <a href="artist.detail.html?id=@guestTileInfo.Guest.GuestID">?id=@guestTileInfo.Guest.FullName</a>
+          <div class="text-sm text-muted">@guestTileInfo.TrackCount shows</div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+
+@code
+{
+  private GuestTileModel[] _guestList;
+
+
+  public class GuestTileModel
+  {
+    public Guest Guest { get; }
+
+    public int TrackCount { get; }
+
+
+    public GuestTileModel(
+      Guest guest,
+      int trackCount)
+    {
+      Guest = guest;
+      TrackCount = trackCount;
+    }
+  }
+
+
+  protected override void OnInitialized()
+  {
+    using var context = new CoreContext();
+
+    _guestList = context
+      .Guests
+      .Take(50)
+      .Select(
+        guest => new GuestTileModel(
+          guest, 10))
+      .ToArray();
+
+  //    context
+  //      .ShowMediaEntries
+  //      .Where(
+  //        sme => sme.GuestAppearances
+  //          .Any(ge => ge.Guest == guest))))
+  //.ToArray();
+  }
+
+}

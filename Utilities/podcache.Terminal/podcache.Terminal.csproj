@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ccr.Std.Core" Version="2.2.0" />
+    <PackageReference Include="Ccr.Std.Introspective" Version="2.0.0" />
+    <PackageReference Include="Ccr.Terminal" Version="1.1.0" />
+    <PackageReference Include="InternetArchive.API" Version="1.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\podcache.Data.Domain\podcache.Data.Domain.csproj" />
+    <ProjectReference Include="..\..\Data\podcache.Data\podcache.Data.csproj" />
+  </ItemGroup>
+
+</Project>
